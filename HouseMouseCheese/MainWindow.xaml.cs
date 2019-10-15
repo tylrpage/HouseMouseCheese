@@ -25,7 +25,6 @@ namespace HouseMouseCheese
             InitializeComponent();
 
             Pattern myPattern = new Pattern();
-            Console.WriteLine(ConfigConstant.GetInt("FRAME_WIH"));
         }
     }
 }

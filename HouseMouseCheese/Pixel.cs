@@ -7,8 +7,18 @@ using System.Drawing;
 
 namespace HouseMouseCheese
 {
-    class Pixel
+    public class Pixel
     {
         public Color Color { get; set; }
+
+        public Pixel(Color color)
+        {
+            Color = color;
+        }
+
+        public Pixel()
+        {
+            Color = Color.Red;
+        }
     }
 }

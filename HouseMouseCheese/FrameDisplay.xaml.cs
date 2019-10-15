@@ -20,9 +20,50 @@ namespace HouseMouseCheese
     /// </summary>
     public partial class FrameDisplay : UserControl
     {
+        private Frame _frame;
+        public Frame Frame
+        {
+            get { return _frame; }
+            set { _frame = value; Update(); }
+        }
+        // Pointers to the rectangle (pixel) controls
+        private Rectangle[] rectangles;
         public FrameDisplay()
         {
             InitializeComponent();
+
+            int width = ConfigConstant.GetInt("FRAME_WIDTH");
+            int height = ConfigConstant.GetInt("FRAME_HEIGHT");
+
+            rectangles = new Rectangle[width * height];
+
+            for (int i = 0; i < height; i++)
+            {
+                StackPanel stackPanel = new StackPanel();
+                stackPanel.Orientation = Orientation.Horizontal;
+                for (int j = 0; j < width; j++)
+                {
+                    Rectangle rectangle = new Rectangle();
+                    rectangle.Width = 20;
+                    rectangle.Height = 20;
+
+                    stackPanel.Children.Add(rectangle);
+                    rectangles[GridHelper.GetGridNumber(i, j)] = rectangle;
+                }
+                Dad.Children.Add(stackPanel);
+            }
+        }
+
+        // Refresh the display according to the Frame property
+        public void Update()
+        {
+            int width = ConfigConstant.GetInt("FRAME_WIDTH");
+            int height = ConfigConstant.GetInt("FRAME_HEIGHT");
+
+            for (int i = 0; i < width * height; i++)
+            {
+                rectangles[i].Fill = new SolidColorBrush(Frame.GetPixel(i).Color);
+            }
         }
     }
 }

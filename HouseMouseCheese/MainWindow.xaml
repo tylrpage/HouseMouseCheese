@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="House Mouse: Cheese" Height="450" Width="800">
     <Grid>
-        
+        <local:FrameDisplay/>
     </Grid>
 </Window>
