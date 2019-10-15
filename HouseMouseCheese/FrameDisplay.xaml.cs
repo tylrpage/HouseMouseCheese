@@ -16,16 +16,13 @@ using System.Windows.Shapes;
 namespace HouseMouseCheese
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for FrameDisplay.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class FrameDisplay : UserControl
     {
-        public MainWindow()
+        public FrameDisplay()
         {
             InitializeComponent();
-
-            Pattern myPattern = new Pattern();
-            Console.WriteLine(ConfigConstant.GetInt("FRAME_WIH"));
         }
     }
 }
