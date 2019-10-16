@@ -20,11 +20,23 @@ namespace HouseMouseCheese
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static Color SelectedColor;
+
         public MainWindow()
         {
             InitializeComponent();
 
+            SelectedColor = Colors.Red;
+
             Pattern myPattern = new Pattern();
+        }
+
+        private void ColorPicker_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
+        {
+            if (e.NewValue != null)
+            {
+                SelectedColor = (Color)e.NewValue;
+            }
         }
     }
 }

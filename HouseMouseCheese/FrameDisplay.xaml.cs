@@ -20,6 +20,8 @@ namespace HouseMouseCheese
     /// </summary>
     public partial class FrameDisplay : UserControl
     {
+        private const int PIXEL_SIZE = 20;
+
         private Frame _frame;
         public Frame Frame
         {
@@ -27,15 +29,19 @@ namespace HouseMouseCheese
             set { _frame = value; Update(); }
         }
         // Pointers to the rectangle (pixel) controls
-        private Rectangle[] rectangles;
+        private PixelDisplay[] pixels;
         public FrameDisplay()
         {
             InitializeComponent();
 
-            int width = ConfigConstant.GetInt("FRAME_WIDTH");
-            int height = ConfigConstant.GetInt("FRAME_HEIGHT");
+            _frame = new Frame();
 
-            rectangles = new Rectangle[width * height];
+            //int width = ConfigConstant.GetInt("FRAME_WIDTH");
+            //int height = ConfigConstant.GetInt("FRAME_HEIGHT");
+            int width = 16;
+            int height = 8;
+
+            pixels = new PixelDisplay[width * height];
 
             for (int i = 0; i < height; i++)
             {
@@ -43,15 +49,26 @@ namespace HouseMouseCheese
                 stackPanel.Orientation = Orientation.Horizontal;
                 for (int j = 0; j < width; j++)
                 {
-                    Rectangle rectangle = new Rectangle();
-                    rectangle.Width = 20;
-                    rectangle.Height = 20;
+                    PixelDisplay pixel = new PixelDisplay(this, _frame.GetPixel(i, j));
+                    pixel.Width = PIXEL_SIZE;
+                    pixel.Height = PIXEL_SIZE;
 
-                    stackPanel.Children.Add(rectangle);
-                    rectangles[GridHelper.GetGridNumber(i, j)] = rectangle;
+                    stackPanel.Children.Add(pixel);
+                    pixels[GridHelper.GetGridNumber(i, j)] = pixel;
                 }
                 Dad.Children.Add(stackPanel);
             }
+
+            Update();
+        }
+
+        void buttonDownHandler(object sender, MouseButtonEventArgs e)
+        {
+            Point clickPosition = e.GetPosition(this);
+            int index = GridHelper.GetGridNumber((int)clickPosition.Y / PIXEL_SIZE, (int)clickPosition.X / PIXEL_SIZE);
+
+            Frame.GetPixel(index).Color = Colors.Red;
+            Update();
         }
 
         // Refresh the display according to the Frame property
@@ -62,7 +79,7 @@ namespace HouseMouseCheese
 
             for (int i = 0; i < width * height; i++)
             {
-                rectangles[i].Fill = new SolidColorBrush(Frame.GetPixel(i).Color);
+                pixels[i].Rect.Fill = new SolidColorBrush(Frame.GetPixel(i).Color);
             }
         }
     }

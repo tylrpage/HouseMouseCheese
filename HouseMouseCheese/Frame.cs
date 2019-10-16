@@ -16,6 +16,10 @@ namespace HouseMouseCheese
             int height = ConfigConstant.GetInt("FRAME_HEIGHT");
 
             _pixels = new Pixel[width * height];
+            for (int i = 0; i < _pixels.Length; i++)
+            {
+                _pixels[i] = new Pixel();
+            }
         }
 
         public Pixel GetPixel(int row, int col)

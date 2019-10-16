@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Drawing;
+using System.Windows.Media;
 
 namespace HouseMouseCheese
 {
@@ -18,7 +18,8 @@ namespace HouseMouseCheese
 
         public Pixel()
         {
-            Color = Color.Red;
+            //Color = ColorHelper.GetRandomColor();
+            Color = Colors.LightGray;
         }
     }
 }
