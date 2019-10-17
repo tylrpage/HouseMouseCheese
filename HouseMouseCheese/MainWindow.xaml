@@ -6,11 +6,18 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:HouseMouseCheese"
         mc:Ignorable="d"
-        Title="House Mouse: Cheese" Height="450" Width="800">
+        Title="House Mouse: Cheese" Height="619.5" Width="621.5">
     <Grid>
-        <StackPanel>
-            <local:FrameDisplay/>
-            <xctk:ColorPicker SelectedColorChanged="ColorPicker_SelectedColorChanged"></xctk:ColorPicker>
-        </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <local:FrameDisplay Grid.Row="0" Grid.Column="0" Margin="10" />
+        <xctk:ColorCanvas Grid.Row="0" Grid.Column="1" SelectedColorChanged="ColorPicker_SelectedColorChanged" Width="234" Height="268" Margin="10"/>
+        <local:FramePanel Grid.Row="1" Grid.ColumnSpan="2" Margin="20"></local:FramePanel>
     </Grid>
 </Window>

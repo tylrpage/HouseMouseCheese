@@ -30,28 +30,28 @@ namespace HouseMouseCheese
         }
         // Pointers to the rectangle (pixel) controls
         private PixelDisplay[] pixels;
+        private int _width, _height;
         public FrameDisplay()
         {
             InitializeComponent();
+            SizeChanged += FrameDisplay_SizeChanged;
 
             _frame = new Frame();
 
-            //int width = ConfigConstant.GetInt("FRAME_WIDTH");
-            //int height = ConfigConstant.GetInt("FRAME_HEIGHT");
-            int width = 16;
-            int height = 8;
+            _width = ConfigConstant.GetInt("FRAME_WIDTH");
+            _height = ConfigConstant.GetInt("FRAME_HEIGHT");
 
-            pixels = new PixelDisplay[width * height];
+            pixels = new PixelDisplay[_width * _height];
 
-            for (int i = 0; i < height; i++)
+            for (int i = 0; i < _height; i++)
             {
                 StackPanel stackPanel = new StackPanel();
                 stackPanel.Orientation = Orientation.Horizontal;
-                for (int j = 0; j < width; j++)
+                for (int j = 0; j < _width; j++)
                 {
                     PixelDisplay pixel = new PixelDisplay(this, _frame.GetPixel(i, j));
-                    pixel.Width = PIXEL_SIZE;
-                    pixel.Height = PIXEL_SIZE;
+                    pixel.Width = 20;
+                    pixel.Height = 20;
 
                     stackPanel.Children.Add(pixel);
                     pixels[GridHelper.GetGridNumber(i, j)] = pixel;
@@ -60,6 +60,18 @@ namespace HouseMouseCheese
             }
 
             Update();
+        }
+
+        private void FrameDisplay_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            double ratio = _width / _height;
+            double actualRatio = e.NewSize.Width / e.NewSize.Height;
+            double newSize = ratio < actualRatio ? e.NewSize.Height / _height : e.NewSize.Width / _width;
+            foreach (PixelDisplay pixel in pixels)
+            {
+                pixel.Width = newSize;
+                pixel.Height = newSize;
+            }
         }
 
         void buttonDownHandler(object sender, MouseButtonEventArgs e)
