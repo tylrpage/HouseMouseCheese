@@ -7,8 +7,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UniformGrid Rows="1">
-        <local:FrameDisplay Grid.Row="0" Grid.Column="0" Margin="10" />
-        <local:FrameDisplay Grid.Row="0" Grid.Column="0" Margin="10" />
-        <local:FrameDisplay Grid.Row="0" Grid.Column="0" Margin="10" />
+        <Border BorderBrush="Blue" BorderThickness="4">
+            <local:FramePreview Grid.Row="0" Grid.Column="0" Margin="10" />
+        </Border>
+        <local:FramePreview Grid.Row="0" Grid.Column="0" Margin="10" />
+        <local:FramePreview Grid.Row="0" Grid.Column="0" Margin="10" />
     </UniformGrid>
 </UserControl>

@@ -18,12 +18,12 @@ namespace HouseMouseCheese
     /// <summary>
     /// Interaction logic for PixelDisplay.xaml
     /// </summary>
-    public partial class PixelDisplay : UserControl
+    public partial class DrawablePixel : UserControl
     {
         private FrameDisplay _parent;
         private Pixel _pixel;
 
-        public PixelDisplay(FrameDisplay parent, Pixel pixel)
+        public DrawablePixel(FrameDisplay parent, Pixel pixel)
         {
             InitializeComponent();
             _parent = parent;

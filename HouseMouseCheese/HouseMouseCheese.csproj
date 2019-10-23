@@ -73,9 +73,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="FrameDisplay.xaml">
+    <Page Include="Controls\DrawableFrame\FrameDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\FramePreview\PixelDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\FramePreview\FramePreview.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="FramePanel.xaml">
       <SubType>Designer</SubType>
@@ -89,13 +97,19 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controls\FramePreview\PixelDisplay.xaml.cs">
+      <DependentUpon>PixelDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FramePreview\FramePreview.xaml.cs">
+      <DependentUpon>FramePreview.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FramePanel.xaml.cs">
       <DependentUpon>FramePanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ColorHelper.cs" />
     <Compile Include="Helpers\ConfigConstant.cs" />
     <Compile Include="Frame.cs" />
-    <Compile Include="FrameDisplay.xaml.cs">
+    <Compile Include="Controls\DrawableFrame\FrameDisplay.xaml.cs">
       <DependentUpon>FrameDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\GridHelper.cs" />
@@ -103,7 +117,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="PixelDisplay.xaml">
+    <Page Include="Controls\DrawableFrame\DrawablePixel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -111,8 +125,8 @@
   <ItemGroup>
     <Compile Include="Pattern.cs" />
     <Compile Include="Pixel.cs" />
-    <Compile Include="PixelDisplay.xaml.cs">
-      <DependentUpon>PixelDisplay.xaml</DependentUpon>
+    <Compile Include="Controls\DrawableFrame\DrawablePixel.xaml.cs">
+      <DependentUpon>DrawablePixel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

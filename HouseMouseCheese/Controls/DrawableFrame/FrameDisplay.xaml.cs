@@ -29,7 +29,7 @@ namespace HouseMouseCheese
             set { _frame = value; Update(); }
         }
         // Pointers to the rectangle (pixel) controls
-        private PixelDisplay[] pixels;
+        private DrawablePixel[] pixels;
         private int _width, _height;
         public FrameDisplay()
         {
@@ -41,7 +41,7 @@ namespace HouseMouseCheese
             _width = ConfigConstant.GetInt("FRAME_WIDTH");
             _height = ConfigConstant.GetInt("FRAME_HEIGHT");
 
-            pixels = new PixelDisplay[_width * _height];
+            pixels = new DrawablePixel[_width * _height];
 
             for (int i = 0; i < _height; i++)
             {
@@ -49,9 +49,7 @@ namespace HouseMouseCheese
                 stackPanel.Orientation = Orientation.Horizontal;
                 for (int j = 0; j < _width; j++)
                 {
-                    PixelDisplay pixel = new PixelDisplay(this, _frame.GetPixel(i, j));
-                    pixel.Width = 20;
-                    pixel.Height = 20;
+                    DrawablePixel pixel = new DrawablePixel(this, _frame.GetPixel(i, j));
 
                     stackPanel.Children.Add(pixel);
                     pixels[GridHelper.GetGridNumber(i, j)] = pixel;
@@ -62,12 +60,13 @@ namespace HouseMouseCheese
             Update();
         }
 
+        // Adjust the sizes of the pixels to be as large as they can while still maintaining the correct ratio
         private void FrameDisplay_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             double ratio = _width / _height;
             double actualRatio = e.NewSize.Width / e.NewSize.Height;
             double newSize = ratio < actualRatio ? e.NewSize.Height / _height : e.NewSize.Width / _width;
-            foreach (PixelDisplay pixel in pixels)
+            foreach (DrawablePixel pixel in pixels)
             {
                 pixel.Width = newSize;
                 pixel.Height = newSize;
