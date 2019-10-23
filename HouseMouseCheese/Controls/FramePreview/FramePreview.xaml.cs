@@ -36,7 +36,7 @@ namespace HouseMouseCheese
             InitializeComponent();
             SizeChanged += FrameDisplay_SizeChanged;
 
-            _frame = new Frame();
+            _frame = new Frame(0);
 
             _width = ConfigConstant.GetInt("FRAME_WIDTH");
             _height = ConfigConstant.GetInt("FRAME_HEIGHT");

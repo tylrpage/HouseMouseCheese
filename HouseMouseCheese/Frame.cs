@@ -8,10 +8,13 @@ namespace HouseMouseCheese
 {
     public class Frame
     {
+        // The frame's place in the pattern
+        public int Number { get; private set; }
         private Pixel[] _pixels;
 
-        public Frame()
+        public Frame(int number)
         {
+            Number = number;
             int width = ConfigConstant.GetInt("FRAME_WIDTH");
             int height = ConfigConstant.GetInt("FRAME_HEIGHT");
 

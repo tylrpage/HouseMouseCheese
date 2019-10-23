@@ -20,36 +20,48 @@ namespace HouseMouseCheese
     /// </summary>
     public partial class DrawablePixel : UserControl
     {
-        private FrameDisplay _parent;
-        private Pixel _pixel;
+        private const double BORDER_THICKNESS_RATIO = 0.1;
 
-        public DrawablePixel(FrameDisplay parent, Pixel pixel)
+        private Color _color;
+        public Color Color { get { return _color; } set { _color = value; Rect.Fill = new SolidColorBrush(value); } }
+        private FrameDisplay _parent;
+        private int _pixelIndex;
+
+        public DrawablePixel(FrameDisplay parent, int pixelIndex)
         {
             InitializeComponent();
+
             _parent = parent;
-            _pixel = pixel;
+            _pixelIndex = pixelIndex;
+            HideBorder();
         }
 
         protected override void OnMouseDown(MouseButtonEventArgs e)
         {
             base.OnMouseDown(e);
-            FillSquare(e);
+            // Eye dropper
+            if (Keyboard.IsKeyDown(Key.LeftCtrl))
+            {
+                ((MainWindow)Application.Current.MainWindow).ColorPicker.SelectedColor = _color;
+            }
+            else
+            {
+                FillSquare(e);
+            }
         }
         protected override void OnMouseEnter(MouseEventArgs e)
         {
             base.OnMouseEnter(e);
-            FillSquare(e);
+            ShowBorder();
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                FillSquare(e);
+            }   
         }
 
         private void FillSquare(MouseEventArgs e)
         {
-            ShowBorder();
-
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                _pixel.Color = MainWindow.SelectedColor;
-                _parent.Update();
-            }
+            _parent.ColorPixel(_pixelIndex);
         }
 
         protected override void OnMouseLeave(MouseEventArgs e)
@@ -61,12 +73,15 @@ namespace HouseMouseCheese
 
         private void HideBorder()
         {
-            Margin = new Thickness(0);
-            Border.BorderThickness = new Thickness(0);
+            Panel.SetZIndex(this, 0);
+            Border.BorderThickness = new Thickness(2);
+            Border.BorderBrush = Brushes.LightGray;
         }
         private void ShowBorder()
         {
+            Panel.SetZIndex(this, 1);
             Border.BorderThickness = new Thickness(2);
+            Border.BorderBrush = Brushes.Black;
         }
     }
 }

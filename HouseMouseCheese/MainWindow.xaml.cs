@@ -21,14 +21,31 @@ namespace HouseMouseCheese
     public partial class MainWindow : Window
     {
         public static Color SelectedColor;
+        public Pattern Pattern { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
 
-            SelectedColor = Colors.Red;
+            this.KeyDown += MainWindow_KeyDown;
 
-            Pattern myPattern = new Pattern();
+            Pattern = new Pattern();
+            FrameDisplay.Frame = Pattern.GetCurrentFrame();
+
+            ColorPicker.SelectedColor = Colors.Red;
+        }
+
+        private void MainWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Go to next/previous frame
+            if (e.Key == Key.Right)
+            {
+                FrameDisplay.Frame = Pattern.NextFrame();
+            }
+            if (e.Key == Key.Left)
+            {
+                FrameDisplay.Frame = Pattern.PreviousFrame();
+            }
         }
 
         private void ColorPicker_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)

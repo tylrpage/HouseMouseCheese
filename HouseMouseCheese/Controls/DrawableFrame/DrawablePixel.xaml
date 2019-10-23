@@ -7,8 +7,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="20" d:DesignWidth="20">
     <Grid>
-        <Border Name="Border" BorderBrush="Black">
-            <Rectangle Name="Rect" Fill="Red" Margin="-0.3"/>
+        <Border BorderThickness="2" Name="Border" BorderBrush="LightGray" Margin="-2,-2,0,0">
+            <Rectangle Name="Rect" Fill="Red"/>
         </Border>
     </Grid>
 </UserControl>

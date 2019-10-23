@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HouseMouseCheese
 {
-    class Pattern
+    public class Pattern
     {
         readonly float[] FRAMES_PER_BEAT_OPTIONS = { 0.25f, 0.5f, 1f, 2f, 4f };
         const int MAX_UNIQUE_CYCLES = 4;
@@ -37,10 +37,37 @@ namespace HouseMouseCheese
             }
         }
         public Frame[] Frames { get; set; }
-
+        private int _currentFrameIndex;
         public Pattern()
         {
+            _currentFrameIndex = 0;
             Frames = new Frame[4 * MAX_UNIQUE_CYCLES];
+            for(int i = 0; i < Frames.Length; i++)
+            {
+                Frames[i] = new Frame(i);
+            }
+        }
+        public Frame GetCurrentFrame()
+        {
+            return Frames[_currentFrameIndex];
+        }
+        public Frame NextFrame()
+        {
+            _currentFrameIndex++;
+            if (_currentFrameIndex >= 4 * MAX_UNIQUE_CYCLES)
+            {
+                _currentFrameIndex = 0;
+            }
+            return Frames[_currentFrameIndex];
+        }
+        public Frame PreviousFrame()
+        {
+            _currentFrameIndex--;
+            if (_currentFrameIndex < 0)
+            {
+                _currentFrameIndex = 4 * MAX_UNIQUE_CYCLES - 1;
+            }
+            return Frames[_currentFrameIndex];
         }
     }
 }

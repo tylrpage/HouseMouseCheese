@@ -19,7 +19,7 @@ namespace HouseMouseCheese
         public Pixel()
         {
             //Color = ColorHelper.GetRandomColor();
-            Color = Colors.LightGray;
+            Color = Colors.Transparent;
         }
     }
 }
