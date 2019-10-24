@@ -40,6 +40,10 @@ namespace HouseMouseCheese
         private int _currentFrameIndex;
         public Pattern()
         {
+            //TEMP
+            _framesPerBeat = 1;
+            _uniqueCycles = 4;
+
             _currentFrameIndex = 0;
             Frames = new Frame[4 * MAX_UNIQUE_CYCLES];
             for(int i = 0; i < Frames.Length; i++)

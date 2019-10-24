@@ -7,11 +7,11 @@
         xmlns:local="clr-namespace:HouseMouseCheese"
         mc:Ignorable="d"
         Title="House Mouse: Cheese" Height="330" Width="621.5"
-        MinHeight="330">
+        MinHeight="380">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="0"/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -20,6 +20,10 @@
             <xctk:ColorCanvas x:Name="ColorPicker" DockPanel.Dock="Right" Grid.Row="0" Grid.Column="1" SelectedColorChanged="ColorPicker_SelectedColorChanged" Width="234" Height="268" Margin="10"/>
             <local:FrameDisplay x:Name="FrameDisplay" Margin="10"/>
         </DockPanel>
+        <UniformGrid Grid.Row="1" Rows="1">
+            <Button x:Name="ExportButton" Click="ExportButton_Click">Export</Button>
+            <Button x:Name="ImportButton" Click="ImportButton_Click">Import</Button>
+        </UniformGrid>
         <!--<local:FramePanel Grid.Row="1" Grid.ColumnSpan="2" Margin="20"></local:FramePanel>-->
     </Grid>
 </Window>

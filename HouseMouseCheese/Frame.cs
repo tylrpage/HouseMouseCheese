@@ -10,7 +10,7 @@ namespace HouseMouseCheese
     {
         // The frame's place in the pattern
         public int Number { get; private set; }
-        private Pixel[] _pixels;
+        public Pixel[] Pixels { get; set; }
 
         public Frame(int number)
         {
@@ -18,20 +18,20 @@ namespace HouseMouseCheese
             int width = ConfigConstant.GetInt("FRAME_WIDTH");
             int height = ConfigConstant.GetInt("FRAME_HEIGHT");
 
-            _pixels = new Pixel[width * height];
-            for (int i = 0; i < _pixels.Length; i++)
+            Pixels = new Pixel[width * height];
+            for (int i = 0; i < Pixels.Length; i++)
             {
-                _pixels[i] = new Pixel();
+                Pixels[i] = new Pixel();
             }
         }
 
         public Pixel GetPixel(int row, int col)
         {
-            return _pixels[GridHelper.GetGridNumber(row, col)];
+            return Pixels[GridHelper.GetGridNumber(row, col)];
         }
         public Pixel GetPixel(int position)
         {
-            return _pixels[position];
+            return Pixels[position];
         }
     }
 }

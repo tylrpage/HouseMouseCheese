@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using HouseMouseCheese.Helpers;
+using Microsoft.Win32;
 
 namespace HouseMouseCheese
 {
@@ -53,6 +55,28 @@ namespace HouseMouseCheese
             if (e.NewValue != null)
             {
                 SelectedColor = (Color)e.NewValue;
+            }
+        }
+
+        private void ExportButton_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Cheese file (*.hmc)|*.hmc";
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                PatternSerializer.WritePattern(Pattern, saveFileDialog.FileName);
+            }
+        }
+
+        private void ImportButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Cheese file (*.hmc)|*.hmc";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                Pattern newPattern = PatternSerializer.ReadPattern(openFileDialog.FileName);
+                Pattern = newPattern;
+                FrameDisplay.Frame = Pattern.Frames[0];
             }
         }
     }
