@@ -35,7 +35,14 @@ namespace HouseMouseCheese
             FrameDisplay.Frame = Pattern.GetCurrentFrame();
 
             ColorPicker.SelectedColor = Colors.Red;
+            //this.LostKeyboardFocus += ReturnFocusToWindow;
         }
+
+        //private void ReturnFocusToWindow(object sender, KeyboardFocusChangedEventArgs e)
+        //{
+        //    Keyboard.Focus((MainWindow)Application.Current.MainWindow);
+        //    var element = Keyboard.FocusedElement;
+        //}
 
         private void MainWindow_KeyDown(object sender, KeyEventArgs e)
         {
@@ -52,6 +59,9 @@ namespace HouseMouseCheese
 
         private void ColorPicker_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
         {
+            // Don't allow the color picker to hold any keyboard focus so that arrow keys work
+            Keyboard.Focus(ClearButton);
+
             if (e.NewValue != null)
             {
                 SelectedColor = (Color)e.NewValue;
@@ -79,5 +89,12 @@ namespace HouseMouseCheese
                 FrameDisplay.Frame = Pattern.Frames[0];
             }
         }
+
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
+        {
+            Pattern = new Pattern();
+            FrameDisplay.Frame = Pattern.Frames[0];
+        }
+
     }
 }
