@@ -35,14 +35,7 @@ namespace HouseMouseCheese
             FrameDisplay.Frame = Pattern.GetCurrentFrame();
 
             ColorPicker.SelectedColor = Colors.Red;
-            //this.LostKeyboardFocus += ReturnFocusToWindow;
         }
-
-        //private void ReturnFocusToWindow(object sender, KeyboardFocusChangedEventArgs e)
-        //{
-        //    Keyboard.Focus((MainWindow)Application.Current.MainWindow);
-        //    var element = Keyboard.FocusedElement;
-        //}
 
         private void MainWindow_KeyDown(object sender, KeyEventArgs e)
         {
