@@ -24,6 +24,7 @@ namespace HouseMouseCheese
     {
         public static Color SelectedColor;
         public Pattern Pattern { get; set; }
+        private Pixel[] _clipBoard = null;
 
         public MainWindow()
         {
@@ -47,6 +48,18 @@ namespace HouseMouseCheese
             if (e.Key == Key.Left)
             {
                 FrameDisplay.Frame = Pattern.PreviousFrame();
+            }
+            if (e.Key == Key.C && Keyboard.Modifiers == ModifierKeys.Control)
+            {
+                _clipBoard = DeepCopy.CreateCopy<Pixel>(FrameDisplay.Frame.Pixels);
+            }
+            if (e.Key == Key.V && Keyboard.Modifiers == ModifierKeys.Control)
+            {
+                if (_clipBoard != null)
+                {
+                    FrameDisplay.Frame.Pixels = DeepCopy.CreateCopy<Pixel>(_clipBoard);
+                    FrameDisplay.Update();
+                }
             }
         }
 
@@ -88,6 +101,5 @@ namespace HouseMouseCheese
             Pattern = new Pattern();
             FrameDisplay.Frame = Pattern.Frames[0];
         }
-
     }
 }

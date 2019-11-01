@@ -7,7 +7,7 @@ using System.Windows.Media;
 
 namespace HouseMouseCheese
 {
-    public class Pixel
+    public class Pixel : ICloneable
     {
         public Color Color { get; set; }
 
@@ -20,6 +20,13 @@ namespace HouseMouseCheese
         {
             //Color = ColorHelper.GetRandomColor();
             Color = Colors.Transparent;
+        }
+
+        public object Clone()
+        {
+            Pixel clone = (Pixel)this.MemberwiseClone();
+            clone.Color = this.Color;
+            return clone;
         }
     }
 }
