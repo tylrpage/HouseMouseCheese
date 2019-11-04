@@ -76,6 +76,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helpers\DeepCopy.cs" />
     <Compile Include="Helpers\PatternSerializer.cs" />
     <Compile Include="Protobuf\Cheese.cs" />
     <Page Include="Controls\DrawableFrame\FrameDisplay.xaml">
