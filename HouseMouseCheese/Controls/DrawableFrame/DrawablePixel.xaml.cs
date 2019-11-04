@@ -39,16 +39,34 @@ namespace HouseMouseCheese
         protected override void OnMouseDown(MouseButtonEventArgs e)
         {
             base.OnMouseDown(e);
-            // Eye dropper
-            if (Keyboard.IsKeyDown(Key.LeftCtrl))
+            if (e.ChangedButton == MouseButton.Left)
             {
-                ((MainWindow)Application.Current.MainWindow).ColorPicker.SelectedColor = _color;
+                // Eye dropper
+                if (Keyboard.IsKeyDown(Key.LeftCtrl))
+                {
+                    ((MainWindow)Application.Current.MainWindow).ColorPicker.SelectedColor = _color;
+                }
+                else
+                {
+                    FillSquare(e);
+                }
             }
-            else
+            else if (e.ChangedButton == MouseButton.Right)
             {
-                FillSquare(e);
+                _parent.FillStartIndex = _pixelIndex;
             }
         }
+
+        protected override void OnMouseUp(MouseButtonEventArgs e)
+        {
+            base.OnMouseUp(e);
+            if (e.ChangedButton == MouseButton.Right)
+            {
+                _parent.FillEndIndex = _pixelIndex;
+                _parent.FillArea();
+            }
+        }
+
         protected override void OnMouseEnter(MouseEventArgs e)
         {
             base.OnMouseEnter(e);

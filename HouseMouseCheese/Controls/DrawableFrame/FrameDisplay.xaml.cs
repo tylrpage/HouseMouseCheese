@@ -31,6 +31,9 @@ namespace HouseMouseCheese
         // Pointers to the rectangle (pixel) controls
         private DrawablePixel[] pixels;
         private int _width, _height; // in pixel count
+
+        public int? FillStartIndex = null;
+        public int? FillEndIndex = null;
         public FrameDisplay()
         {
             InitializeComponent();
@@ -58,6 +61,25 @@ namespace HouseMouseCheese
                     pixels[GridHelper.GetGridNumber(i, j)] = pixel;
                 } 
             }
+        }
+
+        public void FillArea()
+        {
+            if (FillStartIndex != null && FillEndIndex != null)
+            {
+                var startCoord = GridHelper.GetGridCoord((int)FillStartIndex);
+                var endCoord = GridHelper.GetGridCoord((int)FillEndIndex);
+                for (int? i = Math.Min(startCoord.row, endCoord.row); i <= Math.Max(startCoord.row, endCoord.row); i++)
+                {
+                    for (int? k = Math.Min(startCoord.col, endCoord.col); k <= Math.Max(startCoord.col, endCoord.col); k++)
+                    {
+                        ColorPixel(GridHelper.GetGridNumber((int)i, (int)k));
+                    }
+                }
+                Update();
+            }
+            FillStartIndex = null;
+            FillEndIndex = null;
         }
 
         public void ColorPixel(int pixelIndex)
