@@ -24,6 +24,7 @@
             <Button x:Name="ClearButton" Click="ClearButton_Click">Clear</Button>
             <Button x:Name="ExportButton" Click="ExportButton_Click">Export</Button>
             <Button x:Name="ImportButton" Click="ImportButton_Click">Import</Button>
+            <Button x:Name="UploadButton" Click="UploadButton_Click">Upload</Button>
         </UniformGrid>
         <!--<local:FramePanel Grid.Row="1" Grid.ColumnSpan="2" Margin="20"></local:FramePanel>-->
     </Grid>

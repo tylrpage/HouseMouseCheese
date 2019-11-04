@@ -89,5 +89,10 @@ namespace HouseMouseCheese
             FrameDisplay.Frame = Pattern.Frames[0];
         }
 
+        private void UploadButton_Click(object sender, RoutedEventArgs e)
+        {
+            ArduinoSerialWriter writer = new ArduinoSerialWriter("COM6", 3);
+            writer.WritePattern(Pattern);
+        }
     }
 }
